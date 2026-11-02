@@ -1,0 +1,25 @@
+{
+    "events": [
+      {
+        "id": "1",
+        "title": "Nyári koncert",
+        "location": "Vác",
+        "startDate": "2027-06-15",
+        "description": "Szabadtéri koncert a városközpontban."
+      },
+      {
+        "id": "2",
+        "title": "Ifjúsági konferencia",
+        "location": "Budapest",
+        "startDate": "2027-07-10",
+        "description": "Közös programok és szemináriumok fiataloknak."
+      },
+      {
+        "id": "3",
+        "title": "Családi nap",
+        "location": "Verőce",
+        "startDate": "2027-08-21",
+        "description": "Egész napos családi és közösségi program."
+      }
+    ]
+}
