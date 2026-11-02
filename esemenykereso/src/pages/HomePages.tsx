@@ -2,8 +2,6 @@ import { Link } from 'react-router'
 
 function HomePage() {
 
-    
-
     return (
     <main className="min-h-screen bg-slate-100 p-6 text-slate-900">
         <div className="mx-auto max-w-5xl">

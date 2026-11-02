@@ -5,3 +5,5 @@ export type Event = {
     startDate: string
     description: string
 }
+
+export type NewEvent = Omit<Event, 'id'>
