@@ -58,3 +58,27 @@ export async function createEvent(data: NewEvent): Promise<Event> {
 
   return createdEvent
 }
+
+export async function updateEvent(
+  id: string,
+  data: NewEvent
+): Promise<Event> {
+  const response = await fetch(
+    `${API_URL}/events/${encodeURIComponent(id)}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }
+  )
+
+  if (!response.ok) {
+    throw new Error('Nem sikerült módosítani az eseményt.')
+  }
+
+  const updatedEvent: Event = await response.json()
+
+  return updatedEvent
+}

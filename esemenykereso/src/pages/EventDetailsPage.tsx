@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { getEventById } from '../api/eventsApi'
-import type { Event } from '../types/Event'
-import { useQuery } from '@tanstack/react-query'  
+import { useQuery } from '@tanstack/react-query'
+import FavoriteButton from '../components/FavoriteButton'
 
 function EventDetailsPage() {
   const { id } = useParams()
@@ -64,6 +63,17 @@ function EventDetailsPage() {
             </h2>
 
             <p className="mt-2">{event.description}</p>
+
+            <Link
+              to={`/events/${encodeURIComponent(event.id)}/edit`}
+              className="mt-4 inline-block rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
+            >
+              Esemény szerkesztése
+            </Link> 
+
+            <div className="mt-6">
+              <FavoriteButton eventId={event.id} />
+            </div>
           </article>
         )}
       </div>

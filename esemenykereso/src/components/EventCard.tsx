@@ -1,5 +1,6 @@
 import type { Event } from '../types/Event'
 import { Link } from 'react-router'
+import FavoriteButton from './FavoriteButton'
 
 type EventCardProps = {
   event: Event
@@ -30,6 +31,10 @@ function EventCard({ event }: EventCardProps) {
       >
         Részletek
       </Link>
+
+      <div className="mt-4">
+        <FavoriteButton eventId={event.id} />
+      </div>
     </article>
   )
 }

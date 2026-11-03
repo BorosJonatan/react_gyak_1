@@ -3,6 +3,7 @@ import {Link} from 'react-router'
 import { getEvents } from '../api/eventsApi'
 import EventCard from '../components/EventCard'
 import { useQuery } from '@tanstack/react-query'
+import { useFavoritesStore } from '../stores/favoritesStore'
 
 function EventsPage() {
   const [search, setSearch] = useState('')
@@ -27,6 +28,10 @@ function EventsPage() {
     queryFn: () => getEvents(debouncedSearch),
   })
 
+  const favoriteCount = useFavoritesStore(
+    (state) => state.favoriteIds.length
+  )
+
   return (
     <main className="min-h-screen bg-slate-100 p-6 text-slate-900">
       <div className="mx-auto max-w-5xl">
@@ -43,13 +48,23 @@ function EventsPage() {
           placeholder="Írd be az esemény nevét..."
           className="mt-2 w-full rounded-lg border border-slate-300 bg-white px-4 py-2"
         />
-
-        <Link
-          to="/events/new"
-          className="mt-4 inline-block rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
-        >
-          Új esemény létrehozása
+        <div className="flex">
+          <Link
+            to="/events/new"
+            className="mt-4 inline-block rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
+          >
+            Új esemény létrehozása
         </Link>
+        
+        {favoriteCount > 0 &&(
+          <div className="inline-flex items-center gap-2 rounded-lg bg-amber-100 mt-4 ml-2 px-3 py-2 text-sm font-medium text-amber-900">
+            <span aria-hidden="true">★</span>
+            <span>Kedvencek: {favoriteCount}</span>
+          </div>
+        )}
+
+        </div>
+        
 
         {isLoading && (
           <p className="mt-6">Események betöltése...</p>
