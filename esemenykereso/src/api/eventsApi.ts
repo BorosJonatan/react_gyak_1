@@ -82,3 +82,16 @@ export async function updateEvent(
 
   return updatedEvent
 }
+
+export async function deleteEvent(id: string): Promise<void> {
+  const response = await fetch(
+    `${API_URL}/events/${encodeURIComponent(id)}`,
+    {
+      method: 'DELETE',
+    }
+  )
+
+  if (!response.ok) {
+    throw new Error('Nem sikerült törölni az eseményt.')
+  }
+}

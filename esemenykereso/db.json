@@ -55,20 +55,7 @@
       "startDate": "2026-11-29",
       "description": "asfsafsafsafsaf",
       "id": "918e21c9-f812-4d7c-a567-fd72ba95289c"
-    },
-    {
-      "title": "5gergeg",
-      "location": "thrthrthrt",
-      "startDate": "2026-11-21",
-      "description": "rhrthrthrth",
-      "id": "1170c7ee-18cf-4871-94ea-cc3bfe107df6"
-    },
-    {
-      "title": "fghfgjfgj",
-      "location": "fgjfgjfgjfgj",
-      "startDate": "2026-11-20",
-      "description": "fgjfgjfgjfgjfgj",
-      "id": "41f0c5be-e4e7-4098-b70c-309a4dd887e3"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

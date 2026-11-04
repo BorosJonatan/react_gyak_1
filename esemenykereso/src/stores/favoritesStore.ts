@@ -4,6 +4,7 @@ import { persist } from 'zustand/middleware'
 type FavoritesStore = {
   favoriteIds: string[]
   toggleFavorite: (id: string) => void
+  removeFavorite: (id: string) => void
 }
 
 export const useFavoritesStore = create<FavoritesStore>()(
@@ -20,7 +21,13 @@ export const useFavoritesStore = create<FavoritesStore>()(
               ? state.favoriteIds.filter((favoriteId) => favoriteId !== id)
               : [...state.favoriteIds, id],
           }
-        }),
+      }),
+      removeFavorite: (id) =>
+      set((state) => ({
+        favoriteIds: state.favoriteIds.filter(
+          (favoriteId) => favoriteId !== id
+        ),
+      })),
     }),
     {
       name: 'esemenykereso-favorites',

@@ -202,6 +202,10 @@ function EditEventForm({ event }: EditEventFormProps) {
           ? 'Mentés...'
           : 'Módosítások mentése'}
       </button>
+
+      <Link className="ml-5" to={`/events/${encodeURIComponent(event.id)}`}>
+          Mégse
+      </Link>
     </form>
   )
 }
