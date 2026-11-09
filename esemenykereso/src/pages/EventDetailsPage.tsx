@@ -4,7 +4,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import FavoriteButton from '../components/FavoriteButton'
 import { useFavoritesStore } from '../stores/favoritesStore'
 import { useSessionStore } from '../stores/sessionStore'
-import { getEventRole } from '../data/mockMemberships'
+import { getEventMembership } from '../data/mockMemberships'
+import { can } from '../utils/permissions'
 
 const roleLabels = {
   fo_szervezo: 'Főszervező',
@@ -45,7 +46,7 @@ function EventDetailsPage() {
   })
 
   async function handleDelete(eventId: string) {
-    if (role !== 'fo_szervezo') {
+    if (!canDelete) {
       return
     }
     const confirmed = window.confirm(
@@ -73,9 +74,14 @@ function EventDetailsPage() {
     }
   }
 
-  const role = user && event
-  ? getEventRole(user.name, event.id)
-  : null
+  const membership = user && event
+    ? getEventMembership(user.name, event.id)
+    : null
+
+  const role = membership?.role ?? null
+
+  const canEdit = can(membership, 'edit_event')
+  const canDelete = can(membership, 'delete_event')
 
   return (
     <main className="min-h-screen bg-slate-100 p-6 text-slate-900">
@@ -126,14 +132,16 @@ function EventDetailsPage() {
               </p>
             )}
 
-            <Link
-              to={`/events/${encodeURIComponent(event.id)}/edit`}
-              className="mt-4 inline-block rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
-            >
-              Esemény szerkesztése
-            </Link> 
+            {canEdit && (
+              <Link
+                to={`/events/${encodeURIComponent(event.id)}/edit`}
+                className="mt-4 inline-block rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-700"
+              >
+                Esemény szerkesztése
+              </Link>
+            )}
 
-            {role === 'fo_szervezo' && (
+            {canDelete && (
               <button
                 type="button"
                 onClick={() => handleDelete(event.id)}

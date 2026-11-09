@@ -7,6 +7,7 @@ import EditEventPage from './pages/EditEventPage'
 import LoginPage from './pages/LoginPage'
 import SessionBar from './components/SessionBar'
 import RequireLogin from './components/RequireLogin'
+import RequireEventPermission from './components/RequireEventPermission'
 
 function App() {
   return (
@@ -22,8 +23,17 @@ function App() {
               <NewEventPage />
             </RequireLogin>
           }
-     />
-        <Route path="/events/:id/edit" element={<RequireLogin><EditEventPage /></RequireLogin>} />
+        />
+        <Route
+          path="/events/:id/edit"
+          element={
+            <RequireLogin>
+              <RequireEventPermission permission="edit_event">
+                <EditEventPage />
+              </RequireEventPermission>
+            </RequireLogin>
+          }
+        />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
     </>

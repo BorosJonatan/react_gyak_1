@@ -1,3 +1,4 @@
 npm install
-npm npx json-server --watch db.json --port 3000
+npx json-server --watch db.json --port 3000
+node mock-auth-server.cjs
 npm run dev
